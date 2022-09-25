@@ -17,7 +17,7 @@ const BookingItem = ({booking, name, email, date, checkedIn, id, index, removeBo
         <>
             {checkedIn? 
                 <View style={styles.checkedIn}>
-                    <Text style={styles.text}>{name}</Text>
+                    <Text style={styles.heading}>{name}</Text>
                     <Text style={styles.text}>{email}</Text>
                     <Text style={styles.text}>Check In: {date}</Text>
                     <View style={styles.buttonContainer}>
@@ -27,7 +27,7 @@ const BookingItem = ({booking, name, email, date, checkedIn, id, index, removeBo
                 </View>
             :
                 <View style={styles.checkedOut}>
-                    <Text style={styles.text}>{name}</Text>
+                    <Text style={styles.heading}>{name}</Text>
                     <Text style={styles.text}>{email}</Text>
                     <Text style={styles.text}>Check In: {date}</Text>
                     <View style={styles.buttonContainer}>
@@ -44,6 +44,10 @@ const BookingItem = ({booking, name, email, date, checkedIn, id, index, removeBo
 const styles = StyleSheet.create({
     text: {
         color: "black"
+    },
+    heading: {
+        fontWeight: 'bold',
+        color: 'black'
     },
     buttonContainer: {
         flexDirection: "row",

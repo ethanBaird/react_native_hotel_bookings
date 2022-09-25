@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { Text } from "react-native";
 import BookingsList from "../components/BookingsList"
+import BookingsForm from "../components/BookingsForm";
 import { getBookings } from "../services/BookingsServices";
 
 const BookingsContainer = () => {
@@ -37,6 +37,7 @@ const BookingsContainer = () => {
     
     return(
         <>
+            <BookingsForm />
             <BookingsList bookings={bookings} removeBooking={removeBooking} checkIn={checkIn}/>
         </>
     )
