@@ -1,8 +1,9 @@
-const baseUrl = 'http://localhost:9000/api/bookings/'
+const baseUrl = `http://192.168.0.50:9000/api/bookings/`
 
 export const getBookings = () => {
     return fetch(baseUrl)
         .then(res => res.json());
+        
 };
 
 export const postBookings = (payload) => {
