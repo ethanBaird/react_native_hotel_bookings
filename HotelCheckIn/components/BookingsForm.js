@@ -1,44 +1,39 @@
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+
 import { useState } from "react"
 import { TextInput, StyleSheet, View, Text, DatePickerIOSBase, Button, DatePickerIOSComponent, DatePickerIOS, DatePickerAndroid } from "react-native";
+import DatePicker from "react-native-date-picker";
 import { postBookings } from "../services/BookingsServices";
 
 const BookingsForm = ({addBooking}) => {
 
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        date: '',
-        checkedIn: false
-    })
-
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
     const [date, setDate] = useState(new Date())
 
-    const handleChange = (event) => {
-        const newFormData = Object.assign({}, formData);
-        newFormData[event.target.name] = event.target.value;
-        setFormData(newFormData)
+    const handleNameInput = (input) => {
+        setName(input)
     }
 
-    const handleCheck = (event) => {
-        const newFormData = Object.assign({}, formData);
-        newFormData.checkedIn = !newFormData.checkedIn
-        setFormData(newFormData)
+    const handleEmailInput = (input) => {
+        setEmail(input)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        postBookings(formData)
+        const newBooking = {
+            name: name,
+            email: email,
+            date: date,
+            checkedIn: false
+        }
+        postBookings(newBooking)
             .then((result) => {
                 console.log(result)
                 addBooking(result)
             });
-        setFormData({
-            name: '',
-            email: '',
-            date: '',
-            checkedIn: false
-        })
+        setName("")
+        setEmail("")
+        setDate("")
     }
 
     return(
@@ -46,17 +41,30 @@ const BookingsForm = ({addBooking}) => {
             <Text style={styles.heading}>Add Booking</Text>
             <View>
                 <TextInput style={styles.input}
-                    onChange={handleChange}
+                    onChangeText={handleNameInput}
                     name="name"
                     placeholder="name"
                     placeholderTextColor={"black"}
                 />
                 <TextInput style={styles.input}
-                    onChange={handleChange}
+                    onChangeText={handleEmailInput}
                     name="email"
                     placeholder="email"
                     placeholderTextColor={"black"}
                 />
+                {/* <DatePicker></DatePicker> */}
+                <DatePicker
+                    modal
+                    open={open}
+                    date={date}
+                    onConfirm={(date) => {
+                    setOpen(false)
+                    setDate(date)
+                    }}
+                    onCancel={() => {
+                    setOpen(false)
+                    }}
+                 />
                <Button 
                     onPress={handleSubmit} title="submit"/>
             </View>

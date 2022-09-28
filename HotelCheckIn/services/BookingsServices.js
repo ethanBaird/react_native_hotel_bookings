@@ -1,4 +1,8 @@
-const baseUrl = `http://192.168.0.50:9000/api/bookings/`
+import { Platform } from "react-native";
+
+const baseUrl = 'http://192.168.100.243:9000/api/bookings'
+
+
 
 export const getBookings = () => {
     return fetch(baseUrl)

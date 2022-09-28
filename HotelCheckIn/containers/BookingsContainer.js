@@ -8,8 +8,12 @@ const BookingsContainer = () => {
     const [bookings, setBookings] = useState([]);
 
     useEffect(() => {
+        console.log("use effect")
         getBookings()
-            .then((allBookings)=> setBookings(allBookings) )
+            .then((allBookings)=> {
+                console.log("then")
+                setBookings(allBookings)
+            } )
             .catch((error)=>{
                 console.log(error);
             })
@@ -37,7 +41,7 @@ const BookingsContainer = () => {
     
     return(
         <>
-            <BookingsForm />
+            <BookingsForm addBooking={addBooking}/>
             <BookingsList bookings={bookings} removeBooking={removeBooking} checkIn={checkIn}/>
         </>
     )
